@@ -182,34 +182,34 @@ class SpawAgent
     $browser = SpawVars::GetServerVar('HTTP_USER_AGENT');
     //echo $browser;
     // check if msie
-    if (eregi("MSIE[^;]*",$browser,$msie))
+    if (preg_match("/MSIE[^;]*/i",$browser,$msie))
     {
       // get version 
-      if (eregi("[0-9]+\.[0-9]+",$msie[0],$version))
+      if (preg_match("/[0-9]+\.[0-9]+/i",$msie[0],$version))
       {
         // check version
         if ((float)$version[0]>=5.5)
         {
           // finally check if it's not opera impersonating ie
-          if (!eregi("opera",$browser))
+          if (!preg_match("/opera/i",$browser))
           {
             $result = SPAW_AGENT_IE;
           }
         }
       }
     }
-    elseif (ereg("Gecko/([0-9]*)",$browser,$build))
+    elseif (preg_match("/Gecko\/([0-9]*)/",$browser,$build))
     {
       // build date of Mozilla version 1.3 is 20030312
       if ($build[1] > "20030312")
         $result = SPAW_AGENT_GECKO;
     }
-    elseif (eregi("Opera/([0-9]*)", $browser, $opera))
+    elseif (preg_match("/Opera\/([0-9]*)/i", $browser, $opera))
     {
       if ((float)$opera[1] >= 9)
         $result = SPAW_AGENT_OPERA;
     }
-    elseif (eregi("Safari/([0-9]*)", $browser, $safari))
+    elseif (preg_match("/Safari\/([0-9]*)/i", $browser, $safari))
     {
       // safari build 500 or higher (safari 3 or newer)
       if ((float)$safari[1] >= 500)

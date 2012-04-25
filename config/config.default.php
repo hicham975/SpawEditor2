@@ -9,7 +9,7 @@ if (!preg_match('/\/$/', SpawConfig::getStaticConfigValue('DOCUMENT_ROOT')))
   SpawConfig::setStaticConfigItem('DOCUMENT_ROOT', SpawConfig::getStaticConfigValue('DOCUMENT_ROOT').'/');
 // sets physical filesystem directory where spaw files reside
 // should work fine most of the time but if it fails set SPAW_ROOT manually by providing correct path
-SpawConfig::setStaticConfigItem('SPAW_ROOT', str_replace("\\","/",dirname(__FILE__)."/..".'/'));
+SpawConfig::setStaticConfigItem('SPAW_ROOT', str_replace("\\","/",realpath(dirname(__FILE__)."/..").'/'));
 // sets virtual path to the spaw directory on the server
 // if calculation fails set this manually
 SpawConfig::setStaticConfigItem('SPAW_DIR', '/'.str_replace(SpawConfig::getStaticConfigValue("DOCUMENT_ROOT"),'',SpawConfig::getStaticConfigValue("SPAW_ROOT")));

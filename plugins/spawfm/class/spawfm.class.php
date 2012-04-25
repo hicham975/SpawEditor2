@@ -508,7 +508,7 @@ class SpawFm
               $i = 1;
               // pick unused file name
               while (file_exists($this->getCurrentFsDir().$uplfile_name)) {
-                $uplfile_name = ereg_replace('(.*)(\.[a-zA-Z]+)$', '\1_'.$i.'\2', $uplfile['name']);
+                $uplfile_name = preg_replace('/(.*)(\.[a-zA-Z]+)$/', '\1_'.$i.'\2', $uplfile['name']);
                 $i++;
               }
               if (!@move_uploaded_file($uplfile['tmp_name'], $this->getCurrentFsDir().$uplfile_name)) {
